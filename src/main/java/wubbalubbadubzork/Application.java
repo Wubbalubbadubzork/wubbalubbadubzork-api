@@ -3,11 +3,25 @@ package wubbalubbadubzork;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import wubbalubbadubzork.classes.Partida;
+import com.google.gson.*;
 
 import static spark.Spark.*;
 
 public class Application {
     public static void main(String[] args) {
+
+        Partida partida = new Partida("123");
+        Gson gson = new Gson();
+        String json = gson.toJson(partida);
+        System.out.println(json);
+
+        Partida target = gson.fromJson("{'codigo':'124'}", Partida.class);
+        System.out.println(gson.toJson(target));
+        target = gson.fromJson("{'codigo':'234'}", Partida.class);
+        System.out.println(gson.toJson(target));
+        target = gson.fromJson("{'codigo':'543'}", Partida.class);
+        System.out.println(gson.toJson(target));
 
         port(8000);
         path("/api", () -> {
